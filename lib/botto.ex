@@ -73,13 +73,24 @@ defmodule Botto do
 
             Client.add_reaction(message, "\u2705")
 
-            Cogs.say "result: #{inspect result}, env: #{inspect env}"
+            Cogs.say "result: ```elixir\n#{result}\n```, env: ```\n#{inspect env}```"
           rescue
             e -> Cogs.say "#{inspect e}"
           end
         _ ->
           Cogs.say "nope you can't do this"
       end
+    end
+
+    Cogs.set_parser(:shell, &List.wrap/1)
+    Cogs.def shell(command) do
+      case message.author.id do
+        "162819866682851329" ->
+          {out, err_code} = System.cmd(command, [])
+          Cogs.say "#{inspect err_code} #{inspect out}"
+        _ ->
+          Cogs.say "dont hax me u fucking cunt"
+        end
     end
 
   end
