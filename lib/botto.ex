@@ -86,7 +86,7 @@ defmodule Botto do
 
 
   def start(_type, _args) do
-    run = Client.start("no")
+    run = Client.start(Application.fetch_env!(:botto, :token))
     Alchemy.Cogs.set_prefix("fuck ")
     use Commands
     run

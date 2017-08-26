@@ -3,4 +3,4 @@
 use Mix.Config
 
 config :botto,
-  token: "meme"
+  token: ""
