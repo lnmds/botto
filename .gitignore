@@ -21,3 +21,4 @@ erl_crash.dump
 
 *.beam
 mix.lock
+/config/config.exs
