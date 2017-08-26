@@ -21,4 +21,10 @@ erl_crash.dump
 
 *.beam
 mix.lock
+
+# I really hate life
 /config/config.exs
+config.*
+*.exs
+config/*
+*/config.exs
