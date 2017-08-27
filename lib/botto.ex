@@ -81,7 +81,7 @@ defmodule Botto do
     Cogs.def shell(cmdline) do
       if Botto.can_admin(message) do
         splitted = String.split cmdline, " ", parts: 2
-        if Enum.length(splitted) < 2 do
+        if Enum.count(splitted) < 2 do
           [command] = splitted
           args = []
         else
