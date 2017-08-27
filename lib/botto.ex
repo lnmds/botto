@@ -71,6 +71,7 @@ defmodule Botto do
           Cogs.say "result: ```elixir\n#{result}\n```, env: ```\n#{inspect env}```"
         rescue
           e -> Cogs.say "#{inspect e}"
+        end
       else
         Cogs.say "nope you can't do this"
       end
