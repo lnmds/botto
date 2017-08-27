@@ -89,7 +89,11 @@ defmodule Botto do
           args = String.split args
         end
 
-        {out, err_code} = System.cmd(command, args, stderr_to_stdout: true)
+        try do
+          {out, err_code} = System.cmd(command, args, stderr_to_stdout: true)
+        rescue
+          e -> Cogs.say "Error while running the command: #{inspect e}"
+        end
 
         Cogs.say "error code: #{err_code}\n```\n#{out}\n```"
       else
