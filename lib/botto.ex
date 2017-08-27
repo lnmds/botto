@@ -3,6 +3,7 @@ defmodule Botto do
   use Application
   alias Alchemy.Client
 
+
   def get_important(lst) do
     l = Enum.count(lst)
     Enum.slice(lst, 1, l - 2)
@@ -16,6 +17,11 @@ defmodule Botto do
     else
       String.trim(code)
     end
+  end
+
+  def can_admin(message) do
+    admins = Application.fetch_info(:botto, :admins)
+    Enum.find(admins, fn(x) -> message.author.id == x end) != nil
   end
 
   defmodule Commands do
@@ -37,10 +43,10 @@ defmodule Botto do
 
     Cogs.set_parser(:echo, &List.wrap/1)
     Cogs.def echo(word) do
-      if message.author.id != "162819866682851329" do
-        Cogs.say "nope"
+      if Botto.can_admin(message) do
+        Cogs.say(word)
       else
-        Cogs.say word
+        Cogs.say "no"
       end
     end
 
@@ -51,47 +57,33 @@ defmodule Botto do
       Cogs.say "#{verb} my #{subject} and call me #{lower}"
     end
 
-    Cogs.def b do
-      case message.author.id do
-        "162819866682851329" ->
-          Cogs.say "ur dum"
-        "97104885337575424" -> 
-          Cogs.say "get bac to d.py!!1!!!!!1"
-        _ ->
-          Cogs.say "nothing 4 u sorry"
-      end
-    end
-
     Cogs.set_parser(:eval, &List.wrap/1)
     Cogs.def eval(code) do
-      case message.author.id do
-        "162819866682851329" ->
-          try do
-            {result, env} = code
-            |> Botto.strip_markup
-            |> Code.eval_string([msg: message])
+      if Botto.can_admin(message) do
+        try do
+          {result, env} = code
+          |> Botto.strip_markup
+          |> Code.eval_string([msg: message])
 
-            Client.add_reaction(message, "\u2705")
- 
-            env = Keyword.delete(env, :msg)
-            Cogs.say "result: ```elixir\n#{result}\n```, env: ```\n#{inspect env}```"
-          rescue
-            e -> Cogs.say "#{inspect e}"
-          end
-        _ ->
-          Cogs.say "nope you can't do this"
+          Client.add_reaction(message, "\u2705")
+
+          env = Keyword.delete(env, :msg)
+          Cogs.say "result: ```elixir\n#{result}\n```, env: ```\n#{inspect env}```"
+        rescue
+          e -> Cogs.say "#{inspect e}"
+      else
+        Cogs.say "nope you can't do this"
       end
     end
 
     Cogs.set_parser(:shell, &List.wrap/1)
     Cogs.def shell(command) do
-      case message.author.id do
-        "162819866682851329" ->
-          {out, err_code} = System.cmd(command, [])
-          Cogs.say "#{inspect err_code} #{inspect out}"
-        _ ->
-          Cogs.say "dont hax me u fucking cunt"
-        end
+      if Botto.can_admin(message) do
+        {out, err_code} = System.cmd(command, [])
+        Cogs.say "#{inspect err_code} #{inspect out}"
+      else
+        Cogs.say "dont hax me u fucking cunt"
+      end
     end
 
   end
