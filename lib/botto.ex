@@ -68,7 +68,7 @@ defmodule Botto do
           Client.add_reaction(message, "\u2705")
 
           env = Keyword.delete(env, :msg)
-          Cogs.say "result: ```elixir\n#{result}\n```, env: ```\n#{inspect env}```"
+          Cogs.say "result: ```elixir\n#{inspect result}\n```\nenv: ```\n#{inspect env}```"
         rescue
           e -> Cogs.say "#{inspect e}"
         end
