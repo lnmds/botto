@@ -69,10 +69,11 @@ defmodule Botto do
           try do
             {result, env} = code
             |> Botto.strip_markup
-            |> Code.eval_string
+            |> Code.eval_string([msg: message])
 
             Client.add_reaction(message, "\u2705")
-
+ 
+            env = Keyword.delete(env, :msg)
             Cogs.say "result: ```elixir\n#{result}\n```, env: ```\n#{inspect env}```"
           rescue
             e -> Cogs.say "#{inspect e}"
