@@ -20,7 +20,7 @@ defmodule Botto do
   end
 
   def can_admin(message) do
-    admins = Application.fetch_info(:botto, :admins)
+    admins = Application.fetch_env!(:botto, :admins)
     Enum.find(admins, fn(x) -> message.author.id == x end) != nil
   end
 
