@@ -78,9 +78,10 @@ defmodule Botto do
     end
 
     Cogs.set_parser(:shell, &List.wrap/1)
-    Cogs.def shell(command) do
+    Cogs.def shell(cmdline) do
       if Botto.can_admin(message) do
-        {out, err_code} = System.cmd(command, [])
+        [command, args] = String.split cmdline, " ", parts: 2
+        {out, err_code} = System.cmd(command, args)
         Cogs.say "#{inspect err_code} #{inspect out}"
       else
         Cogs.say "dont hax me u fucking cunt"
