@@ -91,11 +91,10 @@ defmodule Botto do
 
         try do
           {out, err_code} = System.cmd(command, args, stderr_to_stdout: true)
+          Cogs.say "error code: #{err_code}\n```\n#{out}\n```"
         rescue
           e -> Cogs.say "Error while running the command: #{inspect e}"
         end
-
-        Cogs.say "error code: #{err_code}\n```\n#{out}\n```"
       else
         Cogs.say "dont hax me u fucking cunt"
       end
