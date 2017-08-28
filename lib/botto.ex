@@ -102,7 +102,7 @@ defmodule Botto do
     end
 
     Cogs.set_parser(:play, &List.wrap/1)
-    Cogs.def music(song) do
+    Cogs.def music(song_url) do
       if Botto.can_admin(message) do
         {:ok, guild_id} = Alchemy.Cache.guild_id(message.channel_id)
         {:ok, guild} = Alchemy.Cache.guild(guild_id)
@@ -114,7 +114,7 @@ defmodule Botto do
           Cogs.say "No voice state found for you."
         else
           Voice.join(guild.id, state.channel_id)
-          Process.sleep(5000)
+          Voice.play_url(guild.id, song_url)
           Voice.leave(guild.id)
         end
 
