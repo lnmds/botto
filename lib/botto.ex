@@ -117,7 +117,7 @@ defmodule Botto do
           r = Voice.play_file(guild.id, "shovel.mp3", [vol: 100])
           IO.inspect r
 
-          Voice.wait_for_end(guild.id)
+          Voice.wait_for_end(guild.id, 1000000)
           Voice.leave(guild.id)
         end
 
