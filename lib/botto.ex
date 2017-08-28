@@ -115,6 +115,7 @@ defmodule Botto do
         else
           Voice.join(guild.id, state.channel_id)
           Voice.play_url(guild.id, song_url)
+          Voice.wait_for_end(guild.id)
           Voice.leave(guild.id)
         end
 
