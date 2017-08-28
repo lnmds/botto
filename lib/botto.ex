@@ -113,9 +113,9 @@ defmodule Botto do
         if state == nil do
           Cogs.say "No voice state found for you."
         else
-          Voice.join(message.guild.id, state.channel_id)
+          Voice.join(guild.id, state.channel_id)
           Process.sleep(5000)
-          Voice.leave(message.guild.id)
+          Voice.leave(guild.id)
         end
 
       else
