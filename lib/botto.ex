@@ -114,8 +114,8 @@ defmodule Botto do
           Cogs.say "No voice state found for you."
         else
           Voice.join(guild.id, state.channel_id)
-          Voice.play_url(guild.id, song_url)
-          Voice.wait_for_end(guild.id)
+          Voice.play_url(guild.id, song_url, [vol: 100])
+          Voice.wait_for_end(guild.id, 6000)
           Voice.leave(guild.id)
         end
 
