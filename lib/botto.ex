@@ -2,6 +2,7 @@
 defmodule Botto do
   use Application
   alias Alchemy.Client
+  alias Alchemy.Voice
 
 
   def get_important(lst) do
@@ -99,9 +100,27 @@ defmodule Botto do
         Cogs.say "dont hax me u fucking cunt"
       end
     end
-
   end
 
+  Cogs.set_parser(:play, &List.wrap/1)
+  Cogs.def play(song) do
+    if Botto.can_admin(message) do
+      guild = message.guild
+      states = guild.voice_states
+      state = Enum.find(states, fn(state) -> state.user_id == message.author.id end)
+
+      if state == nil do
+        Cogs.say "No voice state found for you."
+      else
+        Voice.join(message.guild.id, state.channel_id)
+        Process.sleep(5000)
+        Voice.leave(message.guild.id)
+      end
+
+    else
+      Cogs.say "You can't run music shit rEEE"
+    end
+  end
 
   def start(_type, _args) do
     run = Client.start(Application.fetch_env!(:botto, :token))
