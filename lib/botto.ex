@@ -2,7 +2,6 @@
 defmodule Botto do
   use Application
   alias Alchemy.Client
-  alias Alchemy.Voice
 
 
   def get_important(lst) do
@@ -27,6 +26,7 @@ defmodule Botto do
 
   defmodule Commands do
     use Alchemy.Cogs
+    use Alchemy.Voice
 
 
     Cogs.def ping do
