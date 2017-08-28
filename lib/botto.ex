@@ -104,7 +104,9 @@ defmodule Botto do
     Cogs.set_parser(:play, &List.wrap/1)
     Cogs.def music(song) do
       if Botto.can_admin(message) do
-        guild = message.guild
+        {:ok, guild_id} = Alchemy.Cache.guild_id(message, channel_id)
+        {:ok, guild} = Alchemy.Cache.guild(guild_id)
+
         states = guild.voice_states
         state = Enum.find(states, fn(state) -> state.user_id == message.author.id end)
 
