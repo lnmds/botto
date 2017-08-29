@@ -29,10 +29,9 @@ defmodule Botto.Memes do
     end
 
     Cogs.def embed do
-      %Embed{}
-      |> title("the BEST FUCKING BITCHASS embed")
-      |> description("fuck slice")
-      |> image("https://phoxgirls.are-pretty.sexy/d23c39.png")
+      %Embed{title: "The best EMbed suck my dick...",
+             description: "fuck slice 2017",
+             image: "https://phoxgirls.are-pretty.sexy/d23c39.png"}
       |> Embed.send
     end
 
