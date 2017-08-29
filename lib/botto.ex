@@ -131,8 +131,9 @@ defmodule Botto do
 
   def start(_type, _args) do
     run = Client.start(Application.fetch_env!(:botto, :token))
-    Alchemy.Cogs.set_prefix("fuck ")
+    Alchemy.Cogs.set_prefix(Application.fetch_env!(:botto, :prefix))
     use Commands
+    use Botto.Memes.Commands
     run
   end
 end
