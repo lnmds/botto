@@ -29,7 +29,7 @@ defmodule Botto.Memes do
     end
 
     Cogs.def embed do
-      %Embed()
+      %Embed{}
       |> title("the BEST FUCKING BITCHASS embed")
       |> description("fuck slice")
       |> image("https://phoxgirls.are-pretty.sexy/d23c39.png")
