@@ -19,9 +19,13 @@ defmodule Botto.Memes do
       Client.trigger_typing message.channel.id
 
       raw = HTTPoison.get! "https://xkcd.com/#{num}/info.0.json"
-      {:ok, comic_data} = Poison.decode raw.body
 
-      Cogs.say comic_data["img"]
+      case Poison.decode raw.body do
+        {:ok, comic_data} -> Cogs.say comic_data["img"]
+        {:error, err} -> Cogs.say "Error while decoding: #{inspect err}"
+        _ -> Cogs.say "how did this happen??(not supposed to happen piece of code)"
+      end
+
     end
   end
 end
