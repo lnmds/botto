@@ -1,5 +1,6 @@
 defmodule Botto.Memes do
   alias Alchemy.Client
+  alias Alchemy.Embed
 
   defmodule Commands do
     use Alchemy.Cogs
@@ -29,9 +30,10 @@ defmodule Botto.Memes do
     end
 
     Cogs.def embed do
-      %Alchemy.Embed{title: "The best EMbed suck my dick...",
-             description: "fuck slice 2017",
-             image: "https://phoxgirls.are-pretty.sexy/d23c39.png"}
+      %Embed{}
+      |> Embed.title("the best embed suck my dick.")
+      |> Embed.description("fuck slice 2017")
+      |> Embed.image("https://phoxgirls.are-pretty.sexy/d23c39.png")
       |> Embed.send
     end
 
