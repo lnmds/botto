@@ -34,7 +34,7 @@ defmodule Botto.Memes do
       |> Embed.title("the best embed suck my dick.")
       |> Embed.description("fuck slice 2017")
       |> Embed.image("https://phoxgirls.are-pretty.sexy/d23c39.png")
-      |> Embed.send
+      |> Alchemy.Embed.send
     end
 
   end
