@@ -16,7 +16,7 @@ defmodule Botto.Memes do
     end
 
     Cogs.def xkcd(num) do
-      Client.trigger_typing message.channel.id
+      Client.trigger_typing message.channel_id
 
       raw = HTTPoison.get! "https://xkcd.com/#{num}/info.0.json"
 
