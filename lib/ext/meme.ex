@@ -35,7 +35,7 @@ defmodule Botto.Memes do
       |> Embed.description("fuck slice 2017")
       |> Embed.image("https://phoxgirls.are-pretty.sexy/d23c39.png")
 
-      Client.send_message(msg.channel_id, "testing bitch", [embed: e])
+      Client.send_message(message.channel_id, "testing bitch", [embed: e])
     end
 
   end
