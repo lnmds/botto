@@ -7,6 +7,13 @@ defmodule Botto.Memes do
     Cogs.def meme() do
       Cogs.say "testing from another cog"
     end
+
+    Cogs.def xkcd() do
+      Client.trigger_typing message.channel_id
+      raw = HTTPoison.get! "https://xkcd.com/info.0.json"
+      {:ok, comic_data} = Poison.decode(raw)
+      Cogs.say comic_data["img"]
+    end
   end
 end
 
