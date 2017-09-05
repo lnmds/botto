@@ -38,6 +38,24 @@ defmodule Botto.Memes do
       Client.send_message(message.channel_id, "testing bitch", [embed: e])
     end
 
+    Cogs.def ship(a_id, b_id) do
+      member_a = Alchemy.Cache.member(guild_id, a_id)
+      member_b = Alchemy.Cache.member(guild_id, b_id)
+
+      member_a_int = Integer.parse(a_id)
+      member_b_int = Integer.parse(b_id)
+
+      :rand.seed({:exrop, [member_a_int | member_a_int]})
+      a_score = :rand.uniform(100)
+
+      :rand.seed({:exrop, [member_b_int | member_b_int]})
+      b_score = :rand.uniform(100)
+
+      ship_score = (a_score + b_score) / 2
+
+      Cogs.say "Ship score: **#{ship_score}%**"
+    end
+
   end
 end
 
