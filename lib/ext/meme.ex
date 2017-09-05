@@ -46,6 +46,8 @@ defmodule Botto.Memes do
       member_a_int = Integer.parse(a_id)
       member_b_int = Integer.parse(b_id)
 
+      IO.puts "maint : #{inspect member_a_int}"
+
       IO.inspect :rand.seed({:exrop, [member_a_int | member_a_int]})
       a_score = :rand.uniform(100)
 
