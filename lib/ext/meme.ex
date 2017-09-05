@@ -43,8 +43,8 @@ defmodule Botto.Memes do
       member_a = Alchemy.Cache.member(guild_id, a_id)
       member_b = Alchemy.Cache.member(guild_id, b_id)
 
-      member_a_int = Integer.parse(a_id)
-      member_b_int = Integer.parse(b_id)
+      {member_a_int, _} = Integer.parse(a_id)
+      {member_b_int, _} = Integer.parse(b_id)
 
       IO.puts "maint : #{inspect member_a_int}"
 
