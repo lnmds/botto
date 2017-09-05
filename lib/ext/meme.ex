@@ -39,6 +39,7 @@ defmodule Botto.Memes do
     end
 
     Cogs.def ship(a_id, b_id) do
+      guild_id = Alchemy.Cogs.guild_id()
       member_a = Alchemy.Cache.member(guild_id, a_id)
       member_b = Alchemy.Cache.member(guild_id, b_id)
 
