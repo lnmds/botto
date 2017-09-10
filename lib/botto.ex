@@ -150,8 +150,13 @@ defmodule Botto do
 
     Cogs.def leave do
       {:ok, guild_id} = Alchemy.Cache.guild_id(message.channel_id)
+      case Voice.stop_audio(guild_id) do
+        {:error, err} -> Cogs.say err
+        :ok -> Cogs.say "ok stopaudio"
+      end
+      
       case Voice.leave(guild_id) do
-        :ok -> Cogs.say "ok"
+        :ok -> Cogs.say "ok voiceleave"
         {:error, err} -> Cogs.say err
       end
     end
