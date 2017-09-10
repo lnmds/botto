@@ -113,10 +113,10 @@ defmodule Botto do
         if state == nil do
           Cogs.say "No voice state found for you."
         else
-          status = Voice.join(guild.id, state.channel_id)
+          status = Voice.join(guild_id, state.channel_id)
           IO.inspect(status)
 
-          r = Voice.play_file(guild.id, "shovel.mp3", [vol: 100])
+          r = Voice.play_url(guild_id, song_url, [vol: 100])
           case r do
             {:error, err} -> Cogs.say(err)
             :ok -> Cogs.say("I'm playing it.. I guess.")
@@ -124,7 +124,7 @@ defmodule Botto do
 
           IO.inspect r
 
-          Cogs.say "wait_for_end"
+          Cogs.say "[wait_for_end]"
           Voice.wait_for_end(guild)
           Cogs.say "wait_for_end finished."
 
@@ -138,7 +138,8 @@ defmodule Botto do
     end
 
     Cogs.def current do
-      c = Voice.which_channel(message.guild_id)
+      {:ok, guild_id} = Alchemy.Cache.guild_id(message.channel_id)
+      c = Voice.which_channel(guild_id)
       IO.inspect c
       case c do
         nil -> Cogs.say "nothing"
