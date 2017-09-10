@@ -140,8 +140,19 @@ defmodule Botto do
 
     Cogs.def play(url) do
       {:ok, id} = Cogs.guild_id()
-      Voice.join(id, id)
-      Voice.play_url(id, url)
+      {:ok, guild} = Alchemy.Cache.guild(id)
+
+      state = Enum.find(guild.voice_states, fn state ->
+        state.user_id == message.author.id
+      end)
+
+      if state == nil do
+        Cogs.say("no state rip")
+      end
+
+      IO.inspect(Voice.join(id, state.channel_id))
+      IO.inspect(Voice.play_url(id, url, [{:vol, 120}]))
+
       Cogs.say "now playing #{url}"
     end
 
