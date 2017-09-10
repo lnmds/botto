@@ -114,7 +114,8 @@ defmodule Botto do
           Cogs.say "No voice state found for you."
         else
           status = Voice.join(guild.id, state.channel_id)
-          Cogs.say(IO.inspect(state))
+          IO.inspect(status)
+
           r = Voice.play_file(guild.id, "shovel.mp3", [vol: 100])
           case r do
             {:error, err} -> Cogs.say(err)
