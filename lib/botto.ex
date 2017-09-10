@@ -138,6 +138,13 @@ defmodule Botto do
       end
     end
 
+    Cogs.def play(url) do
+      {:ok, id} = Cogs.guild_id()
+      Voice.join(id, id)
+      Voice.play_url(id, url)
+      Cogs.say "now playing #{url}"
+    end
+
     Cogs.def current do
       {:ok, guild_id} = Alchemy.Cache.guild_id(message.channel_id)
       c = Voice.which_channel(guild_id)
