@@ -124,6 +124,11 @@ defmodule Botto do
 
           IO.inspect r
 
+          Voice.listen_for_end(guild)
+          receive do
+            {:audio_stopped, ^guild} -> Cogs.say("it died")
+          end
+
           Voice.leave(guild.id)
           Cogs.say "left voice"
         end
