@@ -119,6 +119,7 @@ defmodule Botto do
           r = Voice.play_file(guild.id, "shovel.mp3", [vol: 100])
           case r do
             {:error, err} -> Cogs.say(err)
+            :ok -> Cogs.say("I'm playing it.. I guess.")
           end
 
           IO.inspect r
