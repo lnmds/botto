@@ -113,7 +113,8 @@ defmodule Botto do
         if state == nil do
           Cogs.say "No voice state found for you."
         else
-          Voice.join(guild.id, state.channel_id)
+          status = Voice.join(guild.id, state.channel_id)
+          Cogs.say(IO.inspect(state))
           r = Voice.play_file(guild.id, "shovel.mp3", [vol: 100])
           case r do
             {:error, err} -> Cogs.say(err)
