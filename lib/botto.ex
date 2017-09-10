@@ -124,12 +124,13 @@ defmodule Botto do
 
           IO.inspect r
 
-          Cogs.say "[wait_for_end]"
-          Voice.wait_for_end(guild)
-          Cogs.say "wait_for_end finished."
+          Cogs.say "command execution finished"
+          #Cogs.say "[wait_for_end]"
+          #Voice.wait_for_end(guild)
+          #Cogs.say "wait_for_end finished."
 
-          Voice.leave(guild.id)
-          Cogs.say "left voice"
+          #Voice.leave(guild.id)
+          #Cogs.say "left voice"
         end
 
       else
@@ -147,6 +148,13 @@ defmodule Botto do
       end
     end
 
+    Cogs.def leave do
+      {:ok, guild_id} = Alchemy.Cache.guild_id(message.channel_id)
+      case Voice.leave(guild_id) do
+        :ok -> Cogs.say "ok"
+        {:error, err} -> Cogs.say err
+      end
+    end
 
   end
 
