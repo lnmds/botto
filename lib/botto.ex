@@ -116,7 +116,7 @@ defmodule Botto do
           status = Voice.join(guild_id, state.channel_id)
           IO.inspect(status)
 
-          r = Voice.play_url(guild_id, song_url, [vol: 100])
+          r = Voice.play_url(guild_id, song_url, [{:vol, 100}])
           case r do
             {:error, err} -> Cogs.say(err)
             :ok -> Cogs.say("I'm playing it.. I guess.")
