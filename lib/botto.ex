@@ -137,6 +137,15 @@ defmodule Botto do
       end
     end
 
+    Cogs.def current do
+      c = Voice.which_channel(message.guild_id)
+      IO.inspect c
+      case c do
+        nil -> Cogs.say "nothing"
+        _ -> Cogs.say "something is running but i cant show it haha"
+      end
+    end
+
 
   end
 
