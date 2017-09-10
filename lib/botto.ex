@@ -115,10 +115,14 @@ defmodule Botto do
         else
           Voice.join(guild.id, state.channel_id)
           r = Voice.play_file(guild.id, "shovel.mp3", [vol: 100])
+          case r do
+            {:error, err} -> Cogs.say(err)
+          end
+
           IO.inspect r
 
-          Process.sleep(1000000)
           Voice.leave(guild.id)
+          Cogs.say "left voice"
         end
 
       else
